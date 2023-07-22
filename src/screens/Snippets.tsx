@@ -567,10 +567,10 @@ export const Snippets = () => {
           }
         >
           {/* Main content area when a snippet is selected */}
-          <div class="w-full h-full">
+          <div data-tauri-drag-region class="w-full h-full" >
+          <div data-tauri-drag-region="" class="h-6"></div>
             {/* Header section of the selected snippet */}
             <div
-              data-tauri-drag-region
               class="border-b flex h-mainHeader items-center px-3 justify-between space-x-3"
             >
               {/* Input field for the name of the selected snippet */}
