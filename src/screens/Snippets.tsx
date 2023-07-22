@@ -476,6 +476,11 @@ export const Snippets = () => {
                     }}
                     // Implementing multi-select functionality when the shift key is held during click
                     onClick={(e) => {
+                      // Check if the game is currently in the "playing" state
+                      if (gameState()) {
+                        // Stop the game if it is playing
+                        handlePlayButtonClick();
+                      }
                       if (e.shiftKey) {
                         e.preventDefault();
                         setSelectedSnippetIds((ids) => {
@@ -539,6 +544,7 @@ export const Snippets = () => {
                       </div>
                     </div>
                   </Link>
+
                 );
               }}
             </For>
@@ -578,18 +584,19 @@ export const Snippets = () => {
               <div class="flex items-center text-xs text-zinc-500 dark:text-zinc-300 space-x-1">
                 {/* Button for selecting the language of the snippet - icon came from https://icon-sets.iconify.design/majesticons/play-circle-line/ and use majesticons:stop-circle-line
  for the stop button*/}
-                <Button
-                  type="button"
-                  icon="i-majesticons:curly-braces"
-                  onClick={() => setOpenLanguageModal(true)}
-                  tooltip={{ content: "Select language mode" }}
-                >
-                  {/* Display the name of the selected language */}
-                  {getLanguageName(snippet()!.language || "plaintext")}
-                </Button>
-
+                <div class={gameState() ? "hidden" : ""}>
+                  <Button
+                    type="button"
+                    icon="i-majesticons:curly-braces"
+                    onClick={() => setOpenLanguageModal(true)}
+                    tooltip={{ content: "Select language mode" }}
+                  >
+                    {/* Display the name of the selected language */}
+                    {getLanguageName(snippet()!.language || "plaintext")}
+                  </Button>
+                </div>
+                
                 {/* Adding the new "Run" button */}
-
                 <Button
                   type="button"
                   icon={gameState() ? "i-ic:baseline-stop" : "i-ic:baseline-play-arrow"}
