@@ -39,206 +39,206 @@ export const languages: {
     id: "plaintext",
     name: "Plain Text",
   },
-  {
-    id: "javascript",
-    name: "JavaScript",
-    extension: () => javascript(),
-  },
-  {
-    id: "jsx",
-    name: "JSX",
-    extension: () => javascript({ jsx: true }),
-  },
-  {
-    id: "typescript",
-    name: "TypeScript",
-    extension: () => javascript({ typescript: true }),
-  },
-  {
-    id: "tsx",
-    name: "TSX",
-    extension: () => javascript({ typescript: true, jsx: true }),
-  },
-  {
-    id: "python",
-    name: "Python",
-    extension: () => python(),
-  },
-  {
-    id: "rust",
-    name: "Rust",
-    extension: () => rust(),
-  },
-  {
-    id: "css",
-    name: "CSS",
-    extension: () => css(),
-  },
-  {
-    id: "html",
-    name: "HTML",
-    extension: () => html(),
-  },
-  {
-    id: "vue",
-    name: "Vue",
-    extension: () => html(),
-  },
-  {
-    id: "svelte",
-    name: "Svelte",
-    extension: () => html(),
-  },
-  {
-    id: "xml",
-    name: "XML",
-    extension: () => xml(),
-  },
+  // {
+  //   id: "javascript",
+  //   name: "JavaScript",
+  //   extension: () => javascript(),
+  // },
+  // {
+  //   id: "jsx",
+  //   name: "JSX",
+  //   extension: () => javascript({ jsx: true }),
+  // },
+  // {
+  //   id: "typescript",
+  //   name: "TypeScript",
+  //   extension: () => javascript({ typescript: true }),
+  // },
+  // {
+  //   id: "tsx",
+  //   name: "TSX",
+  //   extension: () => javascript({ typescript: true, jsx: true }),
+  // },
+  // {
+  //   id: "python",
+  //   name: "Python",
+  //   extension: () => python(),
+  // },
+  // {
+  //   id: "rust",
+  //   name: "Rust",
+  //   extension: () => rust(),
+  // },
+  // {
+  //   id: "css",
+  //   name: "CSS",
+  //   extension: () => css(),
+  // },
+  // {
+  //   id: "html",
+  //   name: "HTML",
+  //   extension: () => html(),
+  // },
+  // {
+  //   id: "vue",
+  //   name: "Vue",
+  //   extension: () => html(),
+  // },
+  // {
+  //   id: "svelte",
+  //   name: "Svelte",
+  //   extension: () => html(),
+  // },
+  // {
+  //   id: "xml",
+  //   name: "XML",
+  //   extension: () => xml(),
+  // },
   {
     id: "markdown",
     name: "Markdown",
     extension: () => markdown(),
   },
-  {
-    id: "cpp",
-    name: "C++",
-    extension: () => cpp(),
-  },
-  {
-    id: "c",
-    name: "C",
-    extension: () => cpp(),
-  },
+  // {
+  //   id: "cpp",
+  //   name: "C++",
+  //   extension: () => cpp(),
+  // },
+  // {
+  //   id: "c",
+  //   name: "C",
+  //   extension: () => cpp(),
+  // },
   {
     id: "csharp",
     name: "C#",
     extension: () => cpp(),
   },
-  {
-    id: "java",
-    name: "Java",
-    extension: () => java(),
-  },
-  {
-    id: "sql",
-    name: "SQL",
-    extension: () => sql(),
-  },
-  {
-    id: "php",
-    name: "PHP",
-    extension: () => php(),
-  },
-  {
-    id: "ruby",
-    name: "Ruby",
-    extension: () => StreamLanguage.define(ruby),
-  },
-  {
-    id: "go",
-    name: "Go",
-    extension: () => StreamLanguage.define(go),
-  },
-  {
-    id: "erlang",
-    name: "Erlang",
-    extension: () => StreamLanguage.define(erlang),
-  },
-  {
-    id: "haskell",
-    name: "Haskell",
-    extension: () => StreamLanguage.define(haskell),
-  },
+  // {
+  //   id: "java",
+  //   name: "Java",
+  //   extension: () => java(),
+  // },
+  // {
+  //   id: "sql",
+  //   name: "SQL",
+  //   extension: () => sql(),
+  // },
+  // {
+  //   id: "php",
+  //   name: "PHP",
+  //   extension: () => php(),
+  // },
+  // {
+  //   id: "ruby",
+  //   name: "Ruby",
+  //   extension: () => StreamLanguage.define(ruby),
+  // },
+  // {
+  //   id: "go",
+  //   name: "Go",
+  //   extension: () => StreamLanguage.define(go),
+  // },
+  // {
+  //   id: "erlang",
+  //   name: "Erlang",
+  //   extension: () => StreamLanguage.define(erlang),
+  // },
+  // {
+  //   id: "haskell",
+  //   name: "Haskell",
+  //   extension: () => StreamLanguage.define(haskell),
+  // },
   {
     id: "lua",
     name: "Lua",
     extension: () => StreamLanguage.define(lua),
   },
-  {
-    id: "nginx",
-    name: "Ngix",
-    extension: () => StreamLanguage.define(nginx),
-  },
-  {
-    id: "swift",
-    name: "Swift",
-    extension: () => StreamLanguage.define(swift),
-  },
-  {
-    id: "yaml",
-    name: "YAML",
-    extension: () => StreamLanguage.define(yaml),
-  },
-  {
-    id: "toml",
-    name: "TOML",
-    extension: () => StreamLanguage.define(toml),
-  },
-  {
-    id: "clojure",
-    name: "Clojure",
-    extension: () => StreamLanguage.define(clojure),
-  },
-  {
-    id: "crystal",
-    name: "Crystal",
-    extension: () => StreamLanguage.define(crystal),
-  },
-  {
-    id: "dockerfile",
-    name: "Dockerfile",
-    extension: () => StreamLanguage.define(dockerFile),
-  },
-  {
-    id: "sass",
-    name: "Sass",
-    extension: () => StreamLanguage.define(sass),
-  },
+  // {
+  //   id: "nginx",
+  //   name: "Ngix",
+  //   extension: () => StreamLanguage.define(nginx),
+  // },
+  // {
+  //   id: "swift",
+  //   name: "Swift",
+  //   extension: () => StreamLanguage.define(swift),
+  // },
+  // {
+  //   id: "yaml",
+  //   name: "YAML",
+  //   extension: () => StreamLanguage.define(yaml),
+  // },
+  // {
+  //   id: "toml",
+  //   name: "TOML",
+  //   extension: () => StreamLanguage.define(toml),
+  // },
+  // {
+  //   id: "clojure",
+  //   name: "Clojure",
+  //   extension: () => StreamLanguage.define(clojure),
+  // },
+  // {
+  //   id: "crystal",
+  //   name: "Crystal",
+  //   extension: () => StreamLanguage.define(crystal),
+  // },
+  // {
+  //   id: "dockerfile",
+  //   name: "Dockerfile",
+  //   extension: () => StreamLanguage.define(dockerFile),
+  // },
+  // {
+  //   id: "sass",
+  //   name: "Sass",
+  //   extension: () => StreamLanguage.define(sass),
+  // },
   {
     id: "json",
     name: "JSON",
     extension: () => json(),
   },
-  {
-    id: "powershell",
-    name: "PowerShell",
-    extension: () => StreamLanguage.define(powerShell),
-  },
-  {
-    id: "dart",
-    name: "Dart",
-    extension: () => StreamLanguage.define(dart),
-  },
-  {
-    id: "kotlin",
-    name: "Kotlin",
-    extension: () => StreamLanguage.define(kotlin),
-  },
-  {
-    id: "scala",
-    name: "Scala",
-    extension: () => StreamLanguage.define(scala),
-  },
-  {
-    id: "r",
-    name: "R",
-    extension: () => StreamLanguage.define(r),
-  },
-  {
-    id: "ocaml",
-    name: "OCaml",
-    extension: () => StreamLanguage.define(oCaml),
-  },
-  {
-    id: "fsharp",
-    name: "F#",
-    extension: () => StreamLanguage.define(fSharp),
-  },
-  {
-    id: "commonlisp",
-    name: "Common Lisp",
-    extension: () => StreamLanguage.define(commonLisp),
-  },
+  // {
+  //   id: "powershell",
+  //   name: "PowerShell",
+  //   extension: () => StreamLanguage.define(powerShell),
+  // },
+  // {
+  //   id: "dart",
+  //   name: "Dart",
+  //   extension: () => StreamLanguage.define(dart),
+  // },
+  // {
+  //   id: "kotlin",
+  //   name: "Kotlin",
+  //   extension: () => StreamLanguage.define(kotlin),
+  // },
+  // {
+  //   id: "scala",
+  //   name: "Scala",
+  //   extension: () => StreamLanguage.define(scala),
+  // },
+  // {
+  //   id: "r",
+  //   name: "R",
+  //   extension: () => StreamLanguage.define(r),
+  // },
+  // {
+  //   id: "ocaml",
+  //   name: "OCaml",
+  //   extension: () => StreamLanguage.define(oCaml),
+  // },
+  // {
+  //   id: "fsharp",
+  //   name: "F#",
+  //   extension: () => StreamLanguage.define(fSharp),
+  // },
+  // {
+  //   id: "commonlisp",
+  //   name: "Common Lisp",
+  //   extension: () => StreamLanguage.define(commonLisp),
+  // },
 ].sort((a, b) => {
   return a.name < b.name ? -1 : 1
 })

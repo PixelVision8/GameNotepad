@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "Dropcode",
+    "productName": "GameNotepad",
     "version": "0.0.7"
   },
   "tauri": {
@@ -30,13 +30,13 @@
         "icons/web/icon-192.ico",
         "icons/macos/AppIcon.icns"
       ],
-      "identifier": "dev.egoist.dropcode",
+      "identifier": "com.pixelvision8.gamenotepad",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
         "frameworks": [],
-        "providerShortName": "GJE9R5VE87",
+        "providerShortName": "PV8GNPD",
         "signingIdentity": null
       },
       "resources": [],
@@ -64,7 +64,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Dropcode",
+        "title": "GameNotepad",
         "width": 800,
         "minWidth": 800,
         "minHeight": 600,
