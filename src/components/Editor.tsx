@@ -1,9 +1,11 @@
-import { basicSetup, EditorView } from "codemirror"
-import { EditorState, type Extension } from "@codemirror/state"
-import { createEffect, createSignal, onCleanup, onMount } from "solid-js"
-import { githubDark, githubLight } from "@uiw/codemirror-theme-github"
-import { useDarkMode } from "../lib/darkmode"
+import { basicSetup, EditorView } from "codemirror";
+import { EditorState, type Extension } from "@codemirror/state";
+import { keymap } from "@codemirror/view";
+import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
+import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
+import { useDarkMode } from "../lib/darkmode";
 
+const { StateCommand, Selection } = EditorState;
 // The Editor component. 
 // It accepts the following props:
 // - `value`: the initial content of the editor
@@ -22,6 +24,36 @@ export const Editor = (props: {
 
   // Check if the application is running in dark mode.
   const isDarkMode = useDarkMode()
+
+  const insertTab: StateCommand = ({state, dispatch}) => {
+    // Get the current selection.
+    let {from, to} = state.selection.main;
+    // If there's a selection, delete it.
+    if (from !== to) dispatch({changes: {from, to, insert: ""}});
+    // Insert four spaces at the current cursor position.
+    dispatch({changes: {from, to: from, insert: "    "}});
+    // Move the caret to the end of the inserted spaces.
+    dispatch({selection: {anchor: from + 4}});
+    return true;
+  };
+  
+  const deleteSpaces: StateCommand = ({state, dispatch}) => {
+    // Get the current selection.
+    let {from, to} = state.selection.main;
+    // If there's a selection, delete it.
+    if (from !== to) dispatch({changes: {from, to, insert: ""}});
+    // If the four characters before the cursor are spaces, delete them.
+    else if (state.doc.sliceString(from - 4, from) === "    ") {
+      dispatch({changes: {from: from - 4, to: from, insert: ""}});
+    }
+    return true;
+  };
+  
+  const tabKeymap = keymap.of([
+    { key: "Tab", run: insertTab },
+    { key: "Shift-Tab", run: deleteSpaces } // Add this line
+  ]);
+  
 
   // Run the following code after the component is mounted.
   onMount(() => {
@@ -44,6 +76,7 @@ export const Editor = (props: {
             handleUpdate,
             EditorView.lineWrapping,
             ...(props.extensions || []),
+            tabKeymap
           ],
         }),
       })
