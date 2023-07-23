@@ -1,11 +1,14 @@
 import { basicSetup, EditorView } from "codemirror";
-import { EditorState, type Extension } from "@codemirror/state";
+import { EditorState, EditorSelection, Transaction, type Extension } from "@codemirror/state";
 import { keymap } from "@codemirror/view";
 import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
 import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 import { useDarkMode } from "../lib/darkmode";
-import { autocompletion, startCompletion } from '@codemirror/autocomplete';
-const { StateCommand, Selection } = EditorState;
+import { CompletionSource, CompletionContext, autocompletion, startCompletion } from '@codemirror/autocomplete';
+// const { StateCommand, Selection } = EditorState;
+
+type StateCommand = (context: {state: EditorState, dispatch: (tr: Transaction) => void}) => boolean;
+
 
 // The Editor component. 
 // It accepts the following props:
@@ -92,25 +95,35 @@ export const Editor = (props: {
     // Get the current selection.
     let {from, to} = state.selection.main;
     // If there's a selection, delete it.
-    if (from !== to) dispatch({changes: {from, to, insert: ""}});
+    if (from !== to) {
+      const tr = state.update({changes: {from, to, insert: ""}});
+      dispatch(tr);
+    }
     // Insert four spaces at the current cursor position.
-    dispatch({changes: {from, to: from, insert: "    "}});
+    const tr = state.update({changes: {from, to: from, insert: "    "}});
+    dispatch(tr);
     // Move the caret to the end of the inserted spaces.
-    dispatch({selection: {anchor: from + 4}});
+    const trSelection = state.update({selection: EditorSelection.single(from + 4)});
+    dispatch(trSelection);
     return true;
-  };
-  
-  const deleteSpaces: StateCommand = ({state, dispatch}) => {
+};
+
+const deleteSpaces: StateCommand = ({state, dispatch}) => {
     // Get the current selection.
     let {from, to} = state.selection.main;
     // If there's a selection, delete it.
-    if (from !== to) dispatch({changes: {from, to, insert: ""}});
+    if (from !== to) {
+      const tr = state.update({changes: {from, to, insert: ""}});
+      dispatch(tr);
+    }
     // If the four characters before the cursor are spaces, delete them.
     else if (state.doc.sliceString(from - 4, from) === "    ") {
-      dispatch({changes: {from: from - 4, to: from, insert: ""}});
+      const tr = state.update({changes: {from: from - 4, to: from, insert: ""}});
+      dispatch(tr);
     }
     return true;
-  };
+};
+
   
   const tabKeymap = keymap.of([
     { key: "Tab", run: insertTab },

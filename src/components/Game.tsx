@@ -1,8 +1,14 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
 
-// This component is a placeholder for the WebGL game.
-export const Game = () => {
+interface CustomWindow extends Window {
+  GetURL?: () => string;
+  LogToJavaScript?: (message: string) => void;
+  createUnityInstance?: (canvas: HTMLCanvasElement, config: object) => Promise<any>;
+}
 
+declare let window: CustomWindow;
+
+export const Game = () => {
   let canvas: HTMLCanvasElement;
   let gameContainer: HTMLDivElement;
 
@@ -13,8 +19,8 @@ export const Game = () => {
   const r = 256 / 240;
 
   const onResize = () => {
-    let w;
-    let h;
+    let w = 0;
+    let h = 0;
   
     if (scaleToFit) {
       w = gameContainer.offsetWidth;
@@ -80,11 +86,15 @@ export const Game = () => {
       productVersion: "1.0",
     };
 
-    // Initialize the Unity game
-    window.createUnityInstance(canvas, config).then(function (instance) {
-      canvas = instance.Module.canvas;
-      onResize();
-    });
+    // Check if createUnityInstance is defined before calling it
+    if (window.createUnityInstance) {
+      window.createUnityInstance(canvas, config).then(function (instance) {
+        canvas = instance.Module.canvas;
+        onResize();
+      });
+    } else {
+      console.error("window.createUnityInstance is not defined");
+    }
   });
 
   return (

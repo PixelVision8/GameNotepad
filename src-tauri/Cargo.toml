@@ -1,8 +1,8 @@
 [package]
-name = "dropcode"
+name = "gamenotebook"
 version = "0.0.0"
 description = "A Tauri App"
-authors = ["you"]
+authors = ["Jesse Freeman"]
 license = ""
 repository = ""
 edition = "2021"
