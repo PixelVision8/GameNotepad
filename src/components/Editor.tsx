@@ -6,6 +6,7 @@ import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 import { useDarkMode } from "../lib/darkmode";
 import { autocompletion, startCompletion } from '@codemirror/autocomplete';
 const { StateCommand, Selection } = EditorState;
+
 // The Editor component. 
 // It accepts the following props:
 // - `value`: the initial content of the editor
@@ -24,35 +25,6 @@ export const Editor = (props: {
 
   // Check if the application is running in dark mode.
   const isDarkMode = useDarkMode()
-
-  // // Define your own completion source
-  // const pv8CompletionSource = (context) => {
-  //   // Define the PV8 API methods
-  //   const pv8API = [
-  //     'DrawSprite(spriteID, x, y, flipH, flipV, drawMode, colorOffset)',
-  //     'DrawSprites(ids, x, y, width, flipH, flipV, drawMode, colorOffset)',
-  //     'DrawTile(tileID, x, y, flipH, flipV, drawMode, colorOffset)',
-  //     'DrawTiles(ids, x, y, width, flipH, flipV, drawMode, colorOffset)',
-  //     'RedrawDisplay()',
-  //     'RebuildTilemap()',
-  //     // Add more API methods as needed
-  //   ];
-
-  //   // Convert the API methods to the completion format
-  //   const options = pv8API.map(method => ({ label: method }));
-
-  //   // Get the token before the cursor
-  //   const token = context.tokenBefore();
-
-  //   // Set the start of the completion range to the start of the token, if a token was found
-  //   const from = token ? token.from : context.pos;
-
-  //   return {
-  //     from,
-  //     to: context.pos, // The end of the completion range is the current cursor position
-  //     options,
-  //   };
-  // };
 
   // This is a list of PV8's APIs for demonstration purposes
   // You should replace this with the actual list of APIs
@@ -90,6 +62,8 @@ export const Editor = (props: {
     { label: "UpdateTiles", signature: "UpdateTiles(ids, column, row, width, colorOffset, flag)", type: "function", info: "Updates the color offset and flag values of multiple tiles at once." },
   ];
   
+  // A state signal to hold the currently selected option's info.
+  const [getSelectedOptionInfo, setSelectedOptionInfo] = createSignal('');
 
   const completionSource: CompletionSource = (context: CompletionContext) => {
     const beforeCursor = context.state.sliceDoc(0, context.pos);
@@ -100,17 +74,16 @@ export const Editor = (props: {
     }
 
     const wordStart = match.index;
-
+    
     return {
       from: wordStart,
       to: context.pos,
       options: pixelVisionAPI.map(api => ({
         label: api.signature,
         type: api.type,
-        info: api.info,
       })),
     };
-};
+  };
 
   // Then you can use this completion source when you configure autocompletion
   const autocompleteExtension = autocompletion({ override: [completionSource] });

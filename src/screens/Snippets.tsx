@@ -561,7 +561,7 @@ export const Snippets = () => {
             >
               <span class="select-none">
                 {/* The fallback message when no snippet is selected */}
-                Select or create a snippet from sidebar
+                Select or create a game script from sidebar
               </span>
             </div>
           }
@@ -648,8 +648,8 @@ export const Snippets = () => {
                 </div>
               </div>
             </div>
-            {/* Main body section for displaying the content of the snippet */}
-            <div class="h-mainBody overflow-y-auto">
+            {/* Main body section for displaying the content of the snippet added a hack to bring the bottom of the editor panel up to remove additional scroll bar */}
+            <div class="h-mainBody overflow-y-auto" style={{ height: "calc(100% - 4rem)" }}>
               {/* Editor component for editing the content of the snippet */}
               <Show when={!gameState()}>
                 <Editor
