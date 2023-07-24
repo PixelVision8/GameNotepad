@@ -2,9 +2,21 @@ import { createSignal, onCleanup, onMount } from "solid-js";
 
 interface CustomWindow extends Window {
   GetURL?: () => string;
-  LogToJavaScript?: (message: string) => void;
+  LogToJavaScript2?: (message: string) => void;
   createUnityInstance?: (canvas: HTMLCanvasElement, config: object) => Promise<any>;
 }
+
+interface UnityInstance {
+  Module: {
+    canvas: HTMLCanvasElement;
+    // other properties...
+  };
+  Quit: () => void;
+  // other methods...
+}
+
+
+let unityInstance: UnityInstance | undefined; // Declare a variable to hold the Unity game instance
 
 declare let window: CustomWindow;
 
@@ -19,6 +31,11 @@ export const Game = () => {
   const r = 256 / 240;
 
   const onResize = () => {
+
+    if (!canvas || !gameContainer) {
+      return; // Exit the function if canvas or gameContainer is null
+    }
+
     let w = 0;
     let h = 0;
   
@@ -48,8 +65,14 @@ export const Game = () => {
   };
 
   onCleanup(() => {
+
+    if (unityInstance) {
+      unityInstance.Quit(); // Stop the Unity game instance
+    }
+
     window.removeEventListener('resize', onResize);
     delete window.GetURL;
+    delete window.LogToJavaScript2;
   
     // Remove event listeners from the canvas
     // if (canvas) {
@@ -66,11 +89,14 @@ export const Game = () => {
   onMount(() => {
 
     // Define the GetURL function
-    // window.GetURL = () => {
-    //   return "/p64/StreamingAssets/game!!.pv8";
-    // };
+    
+    window.GetURL = () => {
+      console.log("GetURL called!!!!");
+      return "/UnityWebGL/StreamingAssets/game.pv8";
+    };
+
     // Define the LogToJavaScript function
-    window.LogToJavaScript = (message) => {
+    window.LogToJavaScript2 = (message) => {
       console.log("From Unity: " + message);
     };
 

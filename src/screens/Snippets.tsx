@@ -235,9 +235,6 @@ export const Snippets = () => {
   const handlePlayButtonClick = () => {
     // Update the state
     setGameState(!gameState());
-    
-    // Display the alert
-    alert(gameState() ? "Starting the game..." : "Stopping the game...");
   }
 
   // Effect to focus the search input when search type is present

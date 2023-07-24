@@ -4,11 +4,25 @@ import { keymap } from "@codemirror/view";
 import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
 import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 import { useDarkMode } from "../lib/darkmode";
-import { CompletionSource, CompletionContext, autocompletion, startCompletion } from '@codemirror/autocomplete';
+import { autocompletion, startCompletion } from '@codemirror/autocomplete';
 // const { StateCommand, Selection } = EditorState;
 
 type StateCommand = (context: {state: EditorState, dispatch: (tr: Transaction) => void}) => boolean;
 
+interface CompletionResult {
+  from: number;
+  to: number;
+  options: {label: string, type: string}[];
+}
+
+interface CompletionContext {
+  state: EditorState;
+  pos: number;
+  explicit: boolean;
+  matchBefore(expr: RegExp): {from: number, to: number, text: string} | null;
+}
+
+type CompletionSource = (context: CompletionContext) => CompletionResult | null | Promise<CompletionResult | null>;
 
 // The Editor component. 
 // It accepts the following props:
